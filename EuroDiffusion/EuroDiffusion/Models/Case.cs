@@ -14,7 +14,7 @@ namespace EuroDiffusion.Models
             foreach (var country in Countries)
                 country.InitCities(Countries.Count);
 
-            var cities = Countries.SelectMany(c => c.Cities);
+            var cities = Countries.SelectMany(c => c.Cities).ToList();
             var citiesMap = cities.ToDictionary(c => c.Coordinate);
 
             foreach (var city in cities)

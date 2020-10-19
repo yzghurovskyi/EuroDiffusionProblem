@@ -10,5 +10,15 @@
             X = x;
             Y = y;
         }
+
+        public override bool Equals(object obj)
+        {
+            if(!(obj is Coordinate c))
+                return false;
+
+            return X == c.X & Y == c.Y;
+        }
+
+        public override int GetHashCode() => X ^ Y;
     }
 }
