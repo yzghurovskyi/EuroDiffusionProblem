@@ -15,10 +15,21 @@ namespace EuroDiffusion
             var outputPath = Path.Combine(currentDirectory, args[1]);
 
             var input = File.ReadAllText(inputPath);
-            var cases = Case.Parse(input);
-            var output = string.Join(Environment.NewLine, cases.Select(diffusionCase => diffusionCase.Process()));
+            var output = string.Empty;
 
-            File.WriteAllText(outputPath, output);
+            try
+            {
+                var cases = Case.Parse(input);
+                output = string.Join(Environment.NewLine, cases.Select(diffusionCase => diffusionCase.Process()));
+            }
+            catch (ArgumentException ex)
+            {
+                output = ex.Message;
+            }
+            finally
+            {
+                File.WriteAllText(outputPath, output);
+            }
         }
     }
 }
