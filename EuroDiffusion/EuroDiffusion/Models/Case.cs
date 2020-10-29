@@ -20,6 +20,13 @@ namespace EuroDiffusion.Models
         private readonly int _expectedCountriesCount;
         private List<Country> _countries;
 
+        public Case(int number, List<string> caseInput, int expectedCountriesCount)
+        {
+            _number = number;
+            _caseInput = caseInput;
+            _expectedCountriesCount = expectedCountriesCount;
+        }
+
         public string Process()
         {
             try
@@ -78,13 +85,6 @@ namespace EuroDiffusion.Models
 
             return GetResult(
                 $"{string.Join(Environment.NewLine, _countries.OrderBy(c => c.CompleteDay).ThenBy(c => c.Name))}");
-        }
-
-        public Case(int number, List<string> caseInput, int expectedCountriesCount)
-        {
-            _number = number;
-            _caseInput = caseInput;
-            _expectedCountriesCount = expectedCountriesCount;
         }
 
         private void ValidateCountriesCount(int actualCountriesCount)
