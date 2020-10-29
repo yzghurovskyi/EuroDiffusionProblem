@@ -20,5 +20,7 @@
         }
 
         public override int GetHashCode() => X ^ Y;
+
+        public override string ToString() => $"Coordinate {{X: {X}, Y: {Y}}}";
     }
 }

@@ -22,7 +22,7 @@ namespace EuroDiffusion
                 var cases = Case.Parse(input);
                 output = string.Join(Environment.NewLine, cases.Select(diffusionCase => diffusionCase.Process()));
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
                 output = ex.Message;
             }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace EuroDiffusion.Models
 {
@@ -61,6 +62,8 @@ namespace EuroDiffusion.Models
             foreach (var city in Cities)
                 city.EndDay();
         }
+
+        public bool HasForeignBorder() => Cities.Any(c => c.HasForeignNeighbour());
 
         public override string ToString() => $"{Name} {CompleteDay}";
     }

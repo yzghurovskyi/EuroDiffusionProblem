@@ -11,6 +11,7 @@ namespace EuroDiffusion.Models
         private readonly int[] _dailyIncome;
         private readonly int[] _dailyExpenses;
         private readonly List<City> _neighbours;
+        private readonly Country _country;
 
         private const int InitialBudget = 1000000;
         private const int RepresentativeCount = 1000;
@@ -25,6 +26,7 @@ namespace EuroDiffusion.Models
 
             Coordinate = coordinate;
             _neighbours = new List<City>();
+            _country = country;
         }
 
         public bool IsComplete => _totalBalance.All(motifMonets => motifMonets != 0);
@@ -68,6 +70,8 @@ namespace EuroDiffusion.Models
             if (citiesMap.TryGetValue(new Coordinate(Coordinate.X, Coordinate.Y - 1), out neighbour))
                 _neighbours.Add(neighbour);
         }
+
+        public bool HasForeignNeighbour() => _neighbours.Any(n => n._country.Id != _country.Id);
 
         private void Fill(int countryId, int monetsCount) => _dailyIncome[countryId] += monetsCount;
     }
